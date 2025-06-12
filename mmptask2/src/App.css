@@ -1,0 +1,76 @@
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+}
+html,body{
+  height: 1000%;
+  width:100%;
+  background-color: black;
+  color:white;
+}
+a{
+  text-decoration: none;
+}
+button, input, textarea {
+  border: none;
+  background: none;
+  outline: none;
+  font: inherit;
+}
+h1{
+  text-align: center;
+  margin:50px;
+}
+.select-button{
+  position:fixed;
+  left: 50%;
+  top:90%;
+  transform: translate(-50%,0); 
+  color: white;
+  background-color: rgba(255, 0, 0, 0.685);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(116, 110, 110);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.pokimon-modal{
+  height: 100%;
+  width:100vw;
+  position:fixed;
+  top:0;
+  background-color: red;
+  overflow: auto;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  /* background-color: green; */
+}
+
+.team-gallery-container{
+  display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+grid-template-rows: 1fr;
+grid-column-gap: 20px;
+grid-row-gap: 0px;
+height: 100%;
+background-color: red;
+
+}
+.team-gallery-footer button{
+  
+  color: white;
+  background-color: rgba(255, 0, 0, 0.685);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(116, 110, 110);
+  border-radius: 10px;
+  padding: 10px;
+}
