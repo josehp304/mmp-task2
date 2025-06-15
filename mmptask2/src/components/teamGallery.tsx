@@ -1,6 +1,8 @@
 import Cards from "./cards/cards";
-// import { useState } from "react";
+// import styles from "./cards/cards.module.css";
 
+// import { useState } from "react";
+import useStore from "../store"
 
 interface PokemonStat {
     name: string;
@@ -19,7 +21,10 @@ interface TotalStats {
 }
 
 export default function TeamGallery(){
-    let team: Pokemon[] = JSON.parse(localStorage.getItem("selectedPokemon") || "[]")
+    const { selectedPokemon, clearPokemon } = useStore();
+    let team:Pokemon[] = selectedPokemon;
+
+    team = JSON.parse(localStorage.getItem("selectedPokemon") || "[]")
     let total_stats: TotalStats = team.reduce((acc: TotalStats, pokemon: Pokemon) => {
         
         pokemon.stats.forEach((stat: PokemonStat) => {
@@ -48,15 +53,16 @@ export default function TeamGallery(){
             </div>
 
             {team.length > 0 && (
-                <div className="team-stats">
-                    <h2>Team Total Stats</h2>
-                    <ul className="stats-list">
+                <div className="team-stats-card">
+                    <h2>Team Stats</h2>
+                    <div className="team-stats-content">
                         {Object.entries(total_stats).map(([statName, value]) => (
-                            <li key={statName}>
-                                <strong>{statName}:</strong> {value}
-                            </li>
+                            <div key={statName} className="team-stat-row">
+                                <span>{statName}</span>
+                                <span>{value}</span>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 </div>
             )}
             
@@ -64,6 +70,7 @@ export default function TeamGallery(){
                 <button onClick={() => {
                     localStorage.removeItem("selectedPokemon");
                     team = []
+                    clearPokemon();
                 }}>Clear Team</button>
             </div>
             

@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Cards from "./cards/cards"
 import axios from "axios"
+import useStore from "../store"
 export default function SelectPokie(){
         interface Pokemon {
             name: string;
             stats: { name: string; value: number }[];
             sprite_url: string;
         }
-
+        const { addPokemon} = useStore();
         let [pokemons, setPokemons] = useState<Pokemon[]>([
             {
                 name: "bulbasaur",
@@ -71,7 +72,26 @@ export default function SelectPokie(){
             }
         ])
     let[showModal,setShowModal] = useState(false)
-
+    const dropRef = useRef<HTMLDivElement>(null);
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        const pokemon = JSON.parse(e.dataTransfer.getData('text/plain'));
+        console.log('dropped', pokemon.name)
+        localStorage.setItem('selectedPokemon', JSON.stringify([...JSON.parse(localStorage.getItem('selectedPokemon') || '[]'), pokemon]));
+        addPokemon(pokemon);
+        console.log('selectedPokemon', localStorage.getItem('selectedPokemon'))
+        if (dropRef.current) dropRef.current.style.borderColor = 'blue';
+    }
+    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        console.log('dragging leave')
+        if (dropRef.current) dropRef.current.style.borderColor = 'blue';
+    }
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        console.log('dragging over')
+        if (dropRef.current) dropRef.current.style.borderColor = 'yellow';
+    }
     interface PokemonStat {
     base_stat: number;
     effort: number;
@@ -129,7 +149,7 @@ export default function SelectPokie(){
                     <div className='cardContainer '> 
                     {pokemons.map((pokemon) => (
                         <div key={pokemon.name} onClick={() => {
-            console.log(pokemon.name)
+            // console.log(pokemon.name)
 
             let spokemon = localStorage.getItem('selectedPokemon') 
             if (spokemon) {
@@ -138,14 +158,15 @@ export default function SelectPokie(){
                     return;
                 }
                 localStorage.setItem('selectedPokemon', JSON.stringify([...JSON.parse(spokemon), pokemon]));
-                console.log(JSON.parse(spokemon))
+                // console.log(JSON.parse(spokemon))
             } else {
                 localStorage.setItem('selectedPokemon', JSON.stringify([pokemon]));
             }
-            console.log('selectedPokemon', localStorage.getItem('selectedPokemon'))
+            // console.log('selectedPokemon', localStorage.getItem('selectedPokemon'))
         }}><Cards key={pokemon.name} pokemon={pokemon} /></div>
 
                     ))}</div>
+                    <div className="your-team" onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave} ref={dropRef}> drag and drop your team here</div>
                 </div>
             )}
             <button className="select-button" onClick={() => { setShowModal(!showModal) }}>{showModal?"close" :"select your pokimons"}</button>
