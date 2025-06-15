@@ -101,12 +101,10 @@ export default function SelectPokie(){
     };
 }
 
-    async function getPokelist() {
+    async function getPokelist(name:string | null) {
         try {
-            let response = await axios.get(import.meta.env.VITE_POKE_API_URL);
-            console.log("hey")
-            console.log(import.meta.env.VITE_POKE_API_URL);
-            console.log(response.data);
+            
+            let response = await axios.get(import.meta.env.VITE_POKE_API_URL+ name);
             // let initialPokeList: Array<{name: string, stats: Array<{name: string, value: number}>}> = [];
             
             
@@ -131,7 +129,8 @@ export default function SelectPokie(){
         }
     }
     useEffect(()=>{
-        getPokelist().then((data) => {
+        getPokelist(search).then((data) => {
+            console
             console.log(data);
             setPokemons(data);
             console.log(pokemons)
@@ -140,7 +139,7 @@ export default function SelectPokie(){
             console.error("Error fetching Pokémon data:", error);
         });
     },[])
-    
+    let [search, setSearch] = useState('');
 
 
     return(
@@ -148,7 +147,20 @@ export default function SelectPokie(){
         <div>
             {showModal && (
                 <div className='pokimon-modal'>
-                    
+                    <div className="search-container">
+                    <input type="text" placeholder="search" onChange={(e) => {
+                        setSearch(e.target.value)
+                    }} />
+                    <button onClick={() => {
+                        getPokelist(search).then((data) => {
+                            console.log(data);
+                            setPokemons(data);
+                            console.log(pokemons)
+                        }).catch((error) => {
+                            console.error("Error fetching Pokémon data:", error);
+                        });
+                    }}>search</button>
+                    </div>
                     <div className='cardContainer '> 
                     {pokemons.map((pokemon) => (
                         <div key={pokemon.name} onClick={() => {
