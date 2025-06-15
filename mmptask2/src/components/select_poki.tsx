@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react"
 import Cards from "./cards/cards"
 import axios from "axios"
 import useStore from "../store"
+import SmallCards from "./smallCards/smallCards"
 export default function SelectPokie(){
         interface Pokemon {
             name: string;
             stats: { name: string; value: number }[];
             sprite_url: string;
         }
-        const { addPokemon} = useStore();
+        const { addPokemon,selectedPokemon} = useStore();
         let [pokemons, setPokemons] = useState<Pokemon[]>([
             {
                 name: "bulbasaur",
@@ -169,25 +170,30 @@ export default function SelectPokie(){
                     </div> */}
                     <div className='cardContainer '> 
                     {pokemons.map((pokemon) => (
-                        <div key={pokemon.name} onClick={() => {
-            // console.log(pokemon.name)
+                        <div key={pokemon.name}
+        //                  onClick={() => {
+        //     console.log(pokemon.name)
 
-            let spokemon = localStorage.getItem('selectedPokemon') 
-            if (spokemon) {
-                if (JSON.parse(spokemon).length >= 6) {
-                    alert('You can only select up to 6 Pokémon');
-                    return;
-                }
-                localStorage.setItem('selectedPokemon', JSON.stringify([...JSON.parse(spokemon), pokemon]));
-                // console.log(JSON.parse(spokemon))
-            } else {
-                localStorage.setItem('selectedPokemon', JSON.stringify([pokemon]));
-            }
-            // console.log('selectedPokemon', localStorage.getItem('selectedPokemon'))
-        }}><Cards key={pokemon.name} pokemon={pokemon} /></div>
+        //     let spokemon = localStorage.getItem('selectedPokemon') 
+        //     if (spokemon) {
+        //         localStorage.setItem('selectedPokemon', JSON.stringify([...JSON.parse(spokemon), pokemon]));
+        //         addPokemon(JSON.parse(localStorage.getItem('selectedPokemon') || '[]'));
+        //         console.log(JSON.parse(spokemon))
+        //     } else {
+        //         localStorage.setItem('selectedPokemon', JSON.stringify([pokemon]));
+        //         addPokemon(JSON.parse(localStorage.getItem('selectedPokemon') || '[]'));
+        //     }
+        //     console.log('selectedPokemon', localStorage.getItem('selectedPokemon'))
+        // }}
+        ><Cards key={pokemon.name} pokemon={pokemon} /></div>
 
                     ))}</div>
-                    <div className="your-team" onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave} ref={dropRef}> drag and drop your team here</div>
+                    <div className="your-team" onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave} ref={dropRef}> drag and drop your team here
+                        <div className = "s-card-container"> {selectedPokemon.map((pokemon) => (
+                            <SmallCards key={pokemon.name} pokemon={pokemon}/>
+                        ))}</div>
+                       
+                    </div>
                 </div>
             )}
             <button className="select-button" onClick={() => { setShowModal(!showModal) }}>{showModal?"close" :"select your pokimons"}</button>
