@@ -101,10 +101,11 @@ export default function SelectPokie(){
     };
 }
 
-    async function getPokelist(name:string | null) {
+    async function getPokelist() {
         try {
             
-            let response = await axios.get(import.meta.env.VITE_POKE_API_URL+ name);
+            let response = await axios.get(import.meta.env.VITE_POKE_API_URL+'?limit=100');
+            console.log(response.data.results)
             // let initialPokeList: Array<{name: string, stats: Array<{name: string, value: number}>}> = [];
             
             
@@ -128,18 +129,25 @@ export default function SelectPokie(){
             return [];
         }
     }
+    // async function searchPokemon(name:string) {
+    //     try {
+    //         let response = await axios.get(import.meta.env.VITE_POKE_API_URL + name);
+    //         return response.data;
+    //     }
+    //     catch(error) {
+    //         console.log(error);
+    //         return [];
+    //     }
+    // }
     useEffect(()=>{
-        getPokelist(search).then((data) => {
-            console
-            console.log(data);
+        getPokelist().then((data) => {
             setPokemons(data);
-            console.log(pokemons)
             // setShowModal(true); // Show modal after fetching data
         }).catch((error) => {
             console.error("Error fetching Pokémon data:", error);
         });
     },[])
-    let [search, setSearch] = useState('');
+    // let [search, setSearch] = useState('');
 
 
     return(
@@ -147,20 +155,18 @@ export default function SelectPokie(){
         <div>
             {showModal && (
                 <div className='pokimon-modal'>
-                    <div className="search-container">
+                    {/* <div className="search-container">
                     <input type="text" placeholder="search" onChange={(e) => {
                         setSearch(e.target.value)
                     }} />
                     <button onClick={() => {
-                        getPokelist(search).then((data) => {
-                            console.log(data);
-                            setPokemons(data);
-                            console.log(pokemons)
+                        searchPokemon(search).then((data) => {
+                            setPokemons([data]);
                         }).catch((error) => {
                             console.error("Error fetching Pokémon data:", error);
                         });
                     }}>search</button>
-                    </div>
+                    </div> */}
                     <div className='cardContainer '> 
                     {pokemons.map((pokemon) => (
                         <div key={pokemon.name} onClick={() => {
