@@ -103,7 +103,10 @@ export default function SelectPokie(){
 
     async function getPokelist() {
         try {
-            let response = await axios.get("https://pokeapi.co/api/v2/pokemon");
+            let response = await axios.get(import.meta.env.VITE_POKE_API_URL);
+            console.log("hey")
+            console.log(import.meta.env.VITE_POKE_API_URL);
+            console.log(response.data);
             // let initialPokeList: Array<{name: string, stats: Array<{name: string, value: number}>}> = [];
             
             
