@@ -1,0 +1,68 @@
+.container {
+    margin-top: 50px;
+}
+
+.title {
+    text-align: center;
+    margin: 50px;
+}
+
+.team_gallery_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 0px;
+    height: 100%;
+}
+
+.team_gallery_footer button {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.685);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(116, 110, 110);
+    border-radius: 10px;
+    padding: 10px;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 1000;
+}
+
+.team_stats_card {
+    background-color: #ffa600;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+.team_stats_card h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.team_stats_content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.team_stat_row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: rgba(255, 0, 0, 0.685);
+    border-radius: 4px;
+}
+
+.team_stat_row span {
+    color: black;
+}
+
+.team_stat_row span:first-child {
+    font-weight: bold;
+    text-transform: capitalize;
+} 

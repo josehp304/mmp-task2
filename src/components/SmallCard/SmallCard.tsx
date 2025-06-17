@@ -1,5 +1,5 @@
-import s from './smallCards.module.css'
-export default function SmallCards({pokemon}:{pokemon:{name: string, stats: Array<{name: string, value: number}>,sprite_url: string}}) {
+import s from './SmallCard.module.css'
+export default function SmallCard({pokemon}:{pokemon:{name: string, stats: Array<{name: string, value: number}>,sprite_url: string}}) {
 
 
 

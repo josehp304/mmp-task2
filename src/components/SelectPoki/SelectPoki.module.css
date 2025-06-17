@@ -1,0 +1,55 @@
+.select_button {
+    position: fixed;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, 0);
+    color: white;
+    background-color: rgba(255, 0, 0, 0.685);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(116, 110, 110);
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.pokemon_modal {
+    height: 100%;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    background-color: red;
+    overflow: auto;
+    padding-top: 100px;
+}
+
+.your_team {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, 0);
+    min-height: 100px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid blue;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.small_card_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.card_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+} 

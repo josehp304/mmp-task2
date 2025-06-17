@@ -1,5 +1,5 @@
-import s from './cards.module.css'
-export default function Cards({pokemon}:{pokemon:{name: string, stats: Array<{name: string, value: number}>,sprite_url: string}}) {
+import s from './Card.module.css'
+export default function Card({pokemon}:{pokemon:{name: string, stats: Array<{name: string, value: number}>,sprite_url: string}}) {
 
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
         
