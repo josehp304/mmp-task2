@@ -52,3 +52,8 @@ export const calculateTeamStats = (team: Pokemon[]): TotalStats => {
         return acc;
     }, {});
 }; 
+
+export const handleDragStart = (e: React.DragEvent<HTMLDivElement>, pokemon: Pokemon) => {
+    e.dataTransfer.setData('text/plain', JSON.stringify(pokemon));
+    console.log('dragging', pokemon.name)
+};
