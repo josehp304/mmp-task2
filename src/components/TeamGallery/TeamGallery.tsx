@@ -5,7 +5,7 @@ import type { Pokemon } from "../../utils/pokemonUtils"
 import styles from "./TeamGallery.module.css"
 
 export default function TeamGallery() {
-    const { selectedPokemon, clearPokemon } = useStore();
+    const { clearPokemon } = useStore();
     const team: Pokemon[] = JSON.parse(localStorage.getItem("selectedPokemon") || "[]");
     const total_stats = calculateTeamStats(team);
 
