@@ -3,8 +3,9 @@ import Card from "../Card"
 import useStore from "../../store"
 import SmallCard from "../SmallCard"
 import fallbackData from "../../data/fallbackPokemons.json"
-import { handleDrop, handleDragLeave, handleDragOver, getPokelist } from "../../utils/pokemonUtils"
+import { handleDrop, handleDragLeave, handleDragOver } from "../../utils/pokemonUtils"
 import type { Pokemon } from "../../utils/pokemonUtils"
+import { getPokemonList } from "../../api/pokemon"
 import styles from "./SelectPoki.module.css"
 
 export default function SelectPokie() {
@@ -14,7 +15,7 @@ export default function SelectPokie() {
     const dropRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        getPokelist()
+        getPokemonList()
             .then((data) => setPokemons(data))
             .catch((error) => console.error("Error fetching Pokémon data:", error));
     }, []);

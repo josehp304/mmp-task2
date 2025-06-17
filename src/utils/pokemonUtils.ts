@@ -1,4 +1,3 @@
-import axios from "axios";
 import type { RefObject } from "react";
 
 export interface PokemonStat {
@@ -14,15 +13,6 @@ export interface Pokemon {
 
 export interface TotalStats {
     [key: string]: number;
-}
-
-interface ApiPokemonStat {
-    base_stat: number;
-    effort: number;
-    stat: {
-        name: string;
-        url: string;
-    };
 }
 
 export const handleDrop = (
@@ -48,28 +38,6 @@ export const handleDragLeave = (e: React.DragEvent<HTMLDivElement>, dropRef: Ref
 export const handleDragOver = (e: React.DragEvent<HTMLDivElement>, dropRef: RefObject<HTMLDivElement>) => {
     e.preventDefault();
     if (dropRef.current) dropRef.current.style.borderColor = 'yellow';
-};
-
-export const getPokelist = async (): Promise<Pokemon[]> => {
-    try {
-        const response = await axios.get(import.meta.env.VITE_POKE_API_URL + '?limit=100');
-        const pokeList = await Promise.all(
-            response.data.results.map(async (pokemon: { name: string; url: string }) => {
-                const pokemonResponse = await axios.get(pokemon.url);
-                const pokemonData = pokemonResponse.data;
-                const sprite_url: string = pokemonData.sprites.front_default;
-                const stats = pokemonData.stats.map((stat: ApiPokemonStat) => ({
-                    name: stat.stat.name,
-                    value: stat.base_stat,
-                }));
-                return { name: pokemon.name, stats, sprite_url };
-            })
-        );
-        return pokeList;
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
 };
 
 export const calculateTeamStats = (team: Pokemon[]): TotalStats => {
