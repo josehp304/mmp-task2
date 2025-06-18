@@ -48,10 +48,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
-    width: 100%;
+    min-width: 100px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 16px;
+    justify-items: center;
+    /* background-color: green; */
 }
 
 .search_section {
