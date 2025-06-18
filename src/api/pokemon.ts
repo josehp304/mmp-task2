@@ -38,3 +38,14 @@ export const getPokemonList = async (): Promise<Pokemon[]> => {
         return [];
     }
 }; 
+
+export const getPokemonByName = async (name: string): Promise<Pokemon> => {
+    const response = await axios.get(`${BASE_URL}${name}`);
+    const pokemonData = response.data;
+    const sprite_url: string = pokemonData.sprites.front_default;
+    const stats = pokemonData.stats.map((stat: ApiPokemonStat) => ({
+        name: stat.stat.name,
+        value: stat.base_stat,
+    }));
+    return { name: pokemonData.name, stats, sprite_url };
+}

@@ -52,4 +52,129 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 16px;
+}
+
+.search_section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 24px;
+    border-radius: 16px;
+    margin: 0 auto 32px;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search_container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.search_input {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: 2px solid #e1e1e1;
+    border-radius: 25px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.search_input:focus {
+    outline: none;
+    border-color: #ff1c1c;
+    box-shadow: 0 0 0 3px rgba(255, 28, 28, 0.2);
+}
+
+.search_button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #ff1c1c 0%, #ff4040 100%);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.search_button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 28, 28, 0.3);
+}
+
+.search_button:active {
+    transform: translateY(0);
+}
+
+.pokeball {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    animation: bounce 1s infinite;
+}
+
+.pokeball_top {
+    position: absolute;
+    top: 0;
+    width: 24px;
+    height: 12px;
+    background: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.pokeball_middle {
+    position: absolute;
+    top: 10px;
+    width: 24px;
+    height: 4px;
+    background: white;
+    z-index: 2;
+}
+
+.pokeball_dot {
+    position: absolute;
+    top: -4px;
+    left: 8px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #ff1c1c;
+}
+
+.pokeball_bottom {
+    position: absolute;
+    bottom: 0;
+    width: 24px;
+    height: 12px;
+    background: white;
+    border-radius: 0 0 12px 12px;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+@media (max-width: 768px) {
+    .search_section {
+        margin: 0 16px 32px;
+    }
+    
+    .search_container {
+        flex-direction: column;
+    }
+    
+    .search_button {
+        width: 100%;
+        justify-content: center;
+    }
 } 
