@@ -310,3 +310,17 @@
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0 #992424;
 } 
+
+@media (max-width: 768px) {
+        .team_info {
+            
+            flex-direction: column;
+            align-items: center;
+        }
+        .team_info span {
+            padding: 4px 8px;
+        }
+        .team_info span:first-child {
+            font-size: 0.8rem;
+        }
+}
