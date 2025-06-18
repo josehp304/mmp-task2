@@ -1,0 +1,69 @@
+.statBar {
+    width: 100%;
+    margin: 8px 0;
+}
+
+.statInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.statName {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #2E3057;
+}
+
+.statValue {
+    font-weight: 600;
+    color: #2E3057;
+}
+
+.barContainer {
+    width: 100%;
+    height: 12px;
+    background-color: #E0E0E0;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.barFill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    animation: slideIn 1s ease-out;
+}
+
+.barGlow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+} 

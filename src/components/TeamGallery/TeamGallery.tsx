@@ -3,13 +3,12 @@ import useStore from "../../store"
 import { calculateTeamStats } from "../../utils/pokemonUtils"
 import type { Pokemon } from "../../utils/pokemonUtils"
 import styles from "./TeamGallery.module.css"
+import StatBar from "../StatBar/StatBar"
 
 export default function TeamGallery() {
     const { clearPokemon } = useStore();
     const team: Pokemon[] = JSON.parse(localStorage.getItem("selectedPokemon") || "[]");
     const total_stats = calculateTeamStats(team);
-
-    // Calculate team level based on total stats
     const totalStatsSum = Object.values(total_stats).reduce((a, b) => a + b, 0);
     const teamLevel = Math.floor(totalStatsSum / 100);
 
@@ -32,22 +31,21 @@ export default function TeamGallery() {
                             <span>POKéMON: {team.length}</span>
                         </div>
                     </div>
-                    <div className={styles.stats_grid}>
+                    <div className={styles.stats_container}>
                         {Object.entries(total_stats).map(([statName, value]) => (
-                            <div key={statName} className={`${styles.stat_card} ${styles[statName.toLowerCase()]}`}>
-                                <div className={styles.stat_name}>{statName}</div>
-                                <div className={styles.stat_value}>{value}</div>
-                            </div>
+                            <StatBar
+                                key={statName}
+                                statName={statName}
+                                value={value}
+                            />
                         ))}
                     </div>
                     <div className={styles.dashboard_footer}>
                         <button 
                             className={styles.clearButton}
                             onClick={() => {
-                                
-                                    localStorage.removeItem("selectedPokemon");
-                                    clearPokemon();
-                                
+                                localStorage.removeItem("selectedPokemon");
+                                clearPokemon();
                             }}
                         >
                             Release All POKéMON
