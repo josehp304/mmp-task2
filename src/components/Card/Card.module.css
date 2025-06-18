@@ -1,36 +1,131 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  background-color: black;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.274);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 300px;
-  padding:10px;  
-border: 4px solid #FFCB05; /* Pikachu yellow */
-box-shadow: 0 0 0 4px #3B4CCA, 0 4px 8px rgba(0, 0, 0, 0.274); /* Pokemon blue outline */
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.582);
+    width: 250px;
+    min-height: 350px;
+    background: #f3f4f7;
+    border-radius: 14px;
+    padding: 8px;
+    position: relative;
+    transition: transform 0.3s ease;
+    cursor: grab;
+    margin: 10px;
+    border: 8px solid #ffd700;
+    box-shadow: 
+        0 0 0 2px #b8860b,
+        0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.card h1{
-    margin-top: 20px;
-    text-align: center;
-}
-.stats{
+.card_inner {
+    background: linear-gradient(135deg, #fff8dc 0%, #fffaf0 100%);
+    border-radius: 8px;
+    height: 100%;
+    /* padding: 0px; */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.stats li{
-    list-style: none;
-    padding: 0;
-    margin: 0;
+
+.name_banner {
+    background: linear-gradient(90deg, #ffd700 0%, #daa520 100%);
+    color: #2a1f1d;
+    width: calc(100% + 24px);
+    margin: -12px -12px 8px -12px;
+    padding: 0px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-@media screen {
-    
+.image_container {
+    background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.image_container img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card:hover .image_container img {
+    transform: scale(1.1);
+}
+
+.stats {
+    width: 100%;
+    background: #fff;
+    /* background: green; */
+    border-radius: 6px;
+    padding: 2px;
+    margin-top: auto;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats li {
+    list-style: none;
+    padding: 6px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    color: #2a1f1d;
+}
+
+.stats li:last-child {
+    border-bottom: none;
+}
+
+.stat_name {
+    text-transform: capitalize;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.stat_name::before {
+    content: '⚡';
+    margin-right: 6px;
+    color: #ffd700;
+}
+
+.stat_value {
+    font-weight: bold;
+    color: #4169e1;
+    background: rgba(65, 105, 225, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 240px;
+        min-height: 360px;
+    }
+
+    .image_container {
+        width: 140px;
+        height: 140px;
+    }
+
+    .image_container img {
+        width: 120px;
+        height: 120px;
+    }
 }

@@ -1,0 +1,60 @@
+:root {
+  --pokemon-red: #FF0000;
+  --pokemon-blue: #3B4CCA;
+  --pokemon-yellow: #FFDE00;
+  --pokemon-gold: #B3A125;
+  --pokemon-light-blue: #7FCCDE;
+}
+
+@font-face {
+    font-family: 'Pokemon';
+        src: url('/fonts/Pokemon\ Solid.ttf') format('truetype');
+    font-weight:100;
+    font-style: normal;
+  }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Pokemon', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(
+    135deg,
+    var(--pokemon-blue) 0%,
+    var(--pokemon-light-blue) 35%,
+    #ffffff 50%,
+    var(--pokemon-yellow) 65%,
+    var(--pokemon-gold) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  position: relative;
+}
+
+/* body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='30' cy='30' r='28' stroke='rgba(255,255,255,0.1)' stroke-width='4'/%3E%3Ccircle cx='30' cy='30' r='10' stroke='rgba(255,255,255,0.1)' stroke-width='4'/%3E%3Cline x1='30' y1='2' x2='30' y2='58' stroke='rgba(255,255,255,0.1)' stroke-width='4'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+} */
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+

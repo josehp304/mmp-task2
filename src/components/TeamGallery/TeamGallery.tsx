@@ -9,40 +9,61 @@ export default function TeamGallery() {
     const team: Pokemon[] = JSON.parse(localStorage.getItem("selectedPokemon") || "[]");
     const total_stats = calculateTeamStats(team);
 
+    // Calculate team level based on total stats
+    const totalStatsSum = Object.values(total_stats).reduce((a, b) => a + b, 0);
+    const teamLevel = Math.floor(totalStatsSum / 100);
+
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Your Team</h1>
+            <div className={styles.header}>
+                <img 
+                    src="/pokemon_header.png" 
+                    alt="Pokemon Header"
+                    className={styles.headerImage}
+                />
+            </div>
+
+            {team.length > 0 && (
+                <div className={styles.dashboard}>
+                    <div className={styles.dashboard_header}>
+                        <h2 className={styles.dashboard_title}>Team Stats</h2>
+                        <div className={styles.team_info}>
+                            <span>TEAM LV. {teamLevel}</span>
+                            <span>POKéMON: {team.length}</span>
+                        </div>
+                    </div>
+                    <div className={styles.stats_grid}>
+                        {Object.entries(total_stats).map(([statName, value]) => (
+                            <div key={statName} className={`${styles.stat_card} ${styles[statName.toLowerCase()]}`}>
+                                <div className={styles.stat_name}>{statName}</div>
+                                <div className={styles.stat_value}>{value}</div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className={styles.dashboard_footer}>
+                        <button 
+                            className={styles.clearButton}
+                            onClick={() => {
+                                
+                                    localStorage.removeItem("selectedPokemon");
+                                    clearPokemon();
+                                
+                            }}
+                        >
+                            Release All POKéMON
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <div className={styles.team_gallery_container}>
                 {team.length > 0 ? (
                     team.map((pokemon: Pokemon) => (
                         <Card key={pokemon.name} pokemon={pokemon} />
                     ))
                 ) : (
-                    <p>No Pokémon selected</p>
+                    <p>No POKéMON selected yet! Choose your team members.</p>
                 )}
-            </div>
-
-            {team.length > 0 && (
-                <div className={styles.team_stats_card}>
-                    <h2>Team Stats</h2>
-                    <div className={styles.team_stats_content}>
-                        {Object.entries(total_stats).map(([statName, value]) => (
-                            <div key={statName} className={styles.team_stat_row}>
-                                <span>{statName}</span>
-                                <span>{value}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            <div className={styles.team_gallery_footer}>
-                <button onClick={() => {
-                    localStorage.removeItem("selectedPokemon");
-                    clearPokemon();
-                }}>
-                    Clear Team
-                </button>
             </div>
         </div>
     );
